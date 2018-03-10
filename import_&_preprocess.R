@@ -1,16 +1,18 @@
 library(tidyverse)
+library(lubridate)
 
 
 # import data
 train <- read.csv("train.csv", stringsAsFactors = F)
 test <- read.csv("test.csv", stringsAsFactors = F)
+tt <- bind_rows(train, test) %>% 
+  mutate(project_submitted_datetime = ymd_hms(project_submitted_datetime))
 resources <- read.csv("resources.csv", stringsAsFactors = F)
-combined <- bind_rows(train, test) %>% left_join(resources, by = "id")
-# need to detemrine how best to weave in resources data since a project can appear multiple times
+# need to determine how best to weave in resources data since a project can appear multiple times
 
 
 # glimpse
-glimpse(train)
+glimpse(tt)
 glimpse(resources)
 
 
