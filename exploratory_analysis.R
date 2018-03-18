@@ -17,7 +17,12 @@ tt %>% group_by(school_state) %>% summarise(Count = n()) %>% # alters the data f
   
 
 # @Christine descending bar chart by category
-
+tt %>%
+  group_by(project_subject_categories) %>%
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = reorder(project_subject_categories, Count), y = Count)) +
+  geom_bar(stat = "identity") +
+  coord_flip()
 
 # @MJ descending bar chart by teacher prefix
 
